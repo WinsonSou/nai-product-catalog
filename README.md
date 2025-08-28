@@ -1,6 +1,8 @@
-# Nutanix NKP Product Catalog
+# Nutanix NAI 2.4 NKP Product Catalog
 
-All source code and other contents in this repository are covered by the Nutanix License and Services Agreement, which is located at https://www.nutanix.com/legal/eula 
+This is for NAI Bootcamps only
+
+Forked from https://github.com/nutanix-cloud-native/nkp-nutanix-product-catalog
 
 # Overview
 
@@ -11,9 +13,9 @@ This catalog repository holds all the Nutanix Products and their respective vers
 ## How to create catalog on your management cluster?
 <pre>
 nkp create catalog nutanix-product-apps-catalog \
-    -w <workspace_name> \
-    --branch <catalog-release-branch-name> \
-    --url https://github.com/nutanix-cloud-native/nkp-nutanix-product-catalog
+    --workspace <workspace_name> \
+    --branch main \
+    --url https://github.com/WinsonSou/nai-product-catalog
 </pre>
 
 ## How to list all the catalogs on management cluster?
@@ -32,6 +34,7 @@ kubectl get apps -n <workspace_namespace>
 
 ## How to install catalog app?
 <pre>
+From the UI 
 </pre>
 
 ## How to delete catalog from your management cluster?
