@@ -10,6 +10,8 @@ spec:
       namespace: ${workspaceNamespace}
     - name: kserve-crd
       namespace: ${workspaceNamespace}
+    - name: envoy
+      namespace: 
   chart:
     spec:
       chart: nai-core
