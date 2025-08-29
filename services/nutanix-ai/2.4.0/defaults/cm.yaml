@@ -6,7 +6,6 @@ metadata:
   namespace: ${workspaceNamespace}
 data:
   values.yaml: |
-    ---
     # Lables common to add components of nai-core
     labels:
       app.kubernetes.io/name: nai-iep
