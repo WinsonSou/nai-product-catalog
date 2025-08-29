@@ -46,7 +46,7 @@ spec:
       restartPolicy: OnFailure
       containers:
       - name: updater
-        image: alpine/k8s:latest
+        image: alpine/k8s:1.32.2
         command:
         - /bin/bash
         - -c
