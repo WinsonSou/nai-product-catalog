@@ -4,3 +4,4 @@ resources:
 - kserve-crd.yaml
 - kserve.yaml
 - namespace.yaml
+- envoy.yaml

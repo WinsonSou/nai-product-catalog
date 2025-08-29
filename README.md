@@ -11,11 +11,18 @@ This catalog repository holds all the Nutanix Products and their respective vers
 # Receipes
 
 ## How to create catalog on your management cluster?
+
 <pre>
+flux create secret git github-ssh   \
+    --url=ssh://git@github.com/WinsonSou/nai-product-catalog.git \
+    --private-key-file=.ssh/id_rsa \
+    --namespace <workspace_namespace>
+
 nkp create catalog nutanix-product-apps-catalog \
-    --workspace <workspace_name> \
     --branch main \
-    --url https://github.com/WinsonSou/nai-product-catalog
+    --url ssh://github.com/WinsonSou/nai-product-catalog \
+    --secret github-ssh \
+    --workspace <workspace_name> 
 </pre>
 
 ## How to list all the catalogs on management cluster?
