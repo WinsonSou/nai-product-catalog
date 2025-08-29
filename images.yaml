@@ -5,4 +5,5 @@ docker.io:
   images:
     envoyproxy/gateway:
     - v1.3.2
-    - distroless-v1.33.1 
+    envoyproxy/envoy:
+    - distroless-v1.33.1

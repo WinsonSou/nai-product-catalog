@@ -50,3 +50,17 @@ kubectl delete gitrepository nutanix-product-apps-catalog -n <workspace_namespac
 </pre>
 
 For more details, you can refer to Nutanix Portal for Nutanix Kubernetes Platform documentation.
+
+## How to use Mindthegap to create bundle
+<pre>
+mindthegap create bundle --images-file images.yaml
+</pre>
+
+## How to use Mindthegap to push bundle
+<pre>
+mindthegap push bundle --bundle bundle.tar \
+    --to-registry <registry_url> \
+    --to-registry-username <registry_username> \
+    --to-registry-password <registry_password> \
+    [--to-registry-insecure-skip-tls-verify]
+</pre>
