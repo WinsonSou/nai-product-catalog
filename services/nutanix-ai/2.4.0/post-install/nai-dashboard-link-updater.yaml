@@ -1,0 +1,81 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: nai-dashboard-updater
+  namespace: ${workspaceNamespace}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: nai-dashboard-updater
+rules:
+- apiGroups: ["gateway.networking.k8s.io"]
+  resources: ["gateways"]
+  verbs: ["get", "list"]
+- apiGroups: [""]
+  resources: ["configmaps"]
+  verbs: ["get", "patch", "update"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: nai-dashboard-updater
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: nai-dashboard-updater
+subjects:
+- kind: ServiceAccount
+  name: nai-dashboard-updater
+  namespace: ${workspaceNamespace}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: nai-dashboard-link-updater
+  namespace: ${workspaceNamespace}
+  annotations:
+    "helm.sh/hook": post-install,post-upgrade
+    "helm.sh/hook-weight": "5"
+    "helm.sh/hook-delete-policy": hook-succeeded
+spec:
+  template:
+    spec:
+      serviceAccountName: nai-dashboard-updater
+      restartPolicy: OnFailure
+      containers:
+      - name: updater
+        image: bitnami/kubectl:latest
+        command:
+        - /bin/bash
+        - -c
+        - |
+          set -e
+          echo "Waiting for Gateway to be ready..."
+          
+          # Wait for gateway to have an IP address
+          for i in {1..60}; do
+            GATEWAY_IP=$(kubectl get gateway nai-ingress-gateway -n nai-system -o jsonpath='{.status.addresses[0].value}' 2>/dev/null || echo "")
+            if [[ -n "$GATEWAY_IP" && "$GATEWAY_IP" != "null" ]]; then
+              echo "Found Gateway IP: $GATEWAY_IP"
+              break
+            fi
+            echo "Attempt $i/60: Gateway IP not ready, waiting 10s..."
+            sleep 10
+          done
+          
+          if [[ -z "$GATEWAY_IP" || "$GATEWAY_IP" == "null" ]]; then
+            echo "ERROR: Failed to get Gateway IP after 10 minutes"
+            exit 1
+          fi
+          
+          # Update the substitution-vars ConfigMap with the dynamic IP
+          echo "Updating substitution-vars ConfigMap with naiGatewayIP: $GATEWAY_IP"
+          
+          kubectl patch configmap substitution-vars -n ${workspaceNamespace} \
+            --type='merge' \
+            -p="{\"data\":{\"naiGatewayIP\":\"$GATEWAY_IP\"}}"
+          
+          echo "Successfully updated naiGatewayIP to: $GATEWAY_IP"
+          echo "FluxCD will substitute this value in the nai-ui ConfigMap during reconciliation"

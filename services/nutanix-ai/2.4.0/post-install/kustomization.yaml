@@ -4,3 +4,4 @@ resources:
 - node-exporter-rbac-cluster-role.yaml
 - nai-node-exporter-monitor.yaml
 - nai-self-signed-cert.yaml
+- nai-dashboard-link-updater.yaml
