@@ -36,6 +36,24 @@ spec:
   values:
     deployment:
       envoyGateway:
-        image: 
+        image:
           repository: registry.wskn.local/library/envoyproxy/gateway
           tag: v1.3.2
+    config:
+      envoyGateway:
+        gateway:
+          controllerName: gateway.envoyproxy.io/gatewayclass-controller
+        logging:
+          level:
+            default: info
+        provider:
+          type: Kubernetes
+          kubernetes:
+            envoyDeployment:
+              container:
+                image: registry.wskn.local/library/envoyproxy/envoy:distroless-v1.33.1
+            rateLimitDeployment:
+              container:
+                image: registry.wskn.local/library/envoyproxy/ratelimit:0141a24f
+            shutdownManager:
+              image: registry.wskn.local/library/envoyproxy/gateway:v1.3.2

@@ -7,3 +7,5 @@ docker.io:
     - v1.3.2
     envoyproxy/envoy:
     - distroless-v1.33.1
+    envoyproxy/ratelimit:
+    - 0141a24f
