@@ -38,7 +38,7 @@ spec:
   values:
     kserve:
       controller:
-        image: registry.wskn.local/library/nutanix/nai-kserve-controller
+        image: registry.ntnxlab.local/library/nutanix/nai-kserve-controller
         tag: v0.15.0
         deploymentMode: RawDeployment
         gateway:

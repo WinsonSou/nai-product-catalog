@@ -37,5 +37,5 @@ spec:
     deployment:
       envoyGateway:
         image: 
-          repository: registry.wskn.local/library/envoyproxy/gateway
+          repository: registry.ntnxlab.local/library/envoyproxy/gateway
           tag: v1.3.2

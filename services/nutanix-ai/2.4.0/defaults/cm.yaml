@@ -21,7 +21,7 @@ data:
       name: nai-iep-secret
       # Image registry credentials
       credentials:
-        registry: https://index.registry.wskn.local/library/v1/
+        registry: https://index.registry.ntnxlab.local/library/v1/
         username: USERNAME
         password: PASSWORD
         email: EMAIL
@@ -33,7 +33,7 @@ data:
       # IEP operator image details
       iepOperatorImage:
         # IEP operator image name
-        image: registry.wskn.local/library/nutanix/nai-iep-operator
+        image: registry.ntnxlab.local/library/nutanix/nai-iep-operator
         # IEP operator image tag
         tag: v2.4.0
       
@@ -48,7 +48,7 @@ data:
       # Model processor image details
       modelProcessorImage:
         # Model Processor image name
-        image: registry.wskn.local/library/nutanix/nai-model-processor
+        image: registry.ntnxlab.local/library/nutanix/nai-model-processor
         # Model Processor image tag
         tag: v2.4.0
 
@@ -77,7 +77,7 @@ data:
       # NAI UI image details
       naiUiImage:
         # The name of the NAI UI Docker image
-        image: registry.wskn.local/library/nutanix/nai-inference-ui
+        image: registry.ntnxlab.local/library/nutanix/nai-inference-ui
         # The tag of the Docker image to be used
         tag: v2.4.0
       
@@ -97,7 +97,7 @@ data:
       # NAI API image details
       naiApiImage:
         # The name of the NAI API Docker image
-        image: registry.wskn.local/library/nutanix/nai-api
+        image: registry.ntnxlab.local/library/nutanix/nai-api
         # The tag of the Docker image to be used
         tag: v2.4.0
 
@@ -144,16 +144,16 @@ data:
       storageClassName: nai-nfs-storage
 
       # supportedKserveRuntimeVersion Image in model catalog
-      supportedKserveRuntimeImage: "registry.wskn.local/library/78945789345654/hf-gpu-fix"
+      supportedKserveRuntimeImage: "registry.ntnxlab.local/library/78945789345654/hf-gpu-fix"
       supportedKserveCPURuntimeImageTag: "v0.15.2"
       supportedKserveGPURuntimeImageTag: "latest-gpu"
 
       # supportedKserveCustomModelServerRuntime
-      supportedKserveCustomModelServerRuntimeImage: "registry.wskn.local/library/nutanix/nai-kserve-custom-model-server"
+      supportedKserveCustomModelServerRuntimeImage: "registry.ntnxlab.local/library/nutanix/nai-kserve-custom-model-server"
       supportedKserveCustomModelServerRuntimeImageTag: "v2.4.0"
 
       #supportedTGIRuntimeImage
-      supportedTGIImage: "registry.wskn.local/library/nutanix/nai-tgi"
+      supportedTGIImage: "registry.ntnxlab.local/library/nutanix/nai-tgi"
       supportedTGIImageTag: "3.3.4-b2485c9"
       
       # The URL for NAI prometheus service
@@ -163,7 +163,7 @@ data:
       external: false
       naiDbImage:
         # The name of the NAI DB Docker image
-        image: registry.wskn.local/library/nutanix/nai-postgres:16.1-alpine
+        image: registry.ntnxlab.local/library/nutanix/nai-postgres:16.1-alpine
 
       # Postgres sql details
       postgresql:
