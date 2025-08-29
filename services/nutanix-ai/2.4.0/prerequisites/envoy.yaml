@@ -34,8 +34,5 @@ spec:
   releaseName: envoy
   targetNamespace: envoy-gateway-system
   values:
-    deployment:
-      envoyGateway:
-        image: 
-          repository: registry.wskn.local/library/envoyproxy/gateway
-          tag: v1.3.2
+    global:
+      imageRegistry: registry.wskn.local/library
