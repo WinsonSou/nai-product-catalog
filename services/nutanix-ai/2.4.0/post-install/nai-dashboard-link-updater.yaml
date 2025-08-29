@@ -46,7 +46,7 @@ spec:
       restartPolicy: OnFailure
       containers:
       - name: updater
-        image: bitnami/kubectl:latest
+        image: alpine/k8s:latest
         command:
         - /bin/bash
         - -c
@@ -78,4 +78,21 @@ spec:
             -p="{\"data\":{\"naiGatewayIP\":\"$GATEWAY_IP\"}}"
           
           echo "Successfully updated naiGatewayIP to: $GATEWAY_IP"
-          echo "FluxCD will substitute this value in the nai-ui ConfigMap during reconciliation"
+          
+          # Trigger immediate FluxCD reconciliation
+          echo "Triggering FluxCD reconciliation to apply the new gateway IP..."
+          kubectl annotate kustomization nutanix-ai -n ${workspaceNamespace} \
+            reconcile.fluxcd.io/requestedAt="$(date -u +%Y-%m-%dT%H:%M:%SZ)" --overwrite
+          
+          # Wait a moment for reconciliation to complete
+          echo "Waiting for FluxCD reconciliation to complete..."
+          sleep 10
+          
+          # Verify the ConfigMap was updated
+          UPDATED_LINK=$(kubectl get configmap nai-ui -n ${workspaceNamespace} -o jsonpath='{.data.dashboardLink}' 2>/dev/null || echo "")
+          if [[ "$UPDATED_LINK" == "https://$GATEWAY_IP/" ]]; then
+            echo "SUCCESS: Dashboard link updated to: $UPDATED_LINK"
+          else
+            echo "WARNING: Dashboard link may not be updated yet. Current value: $UPDATED_LINK"
+            echo "FluxCD reconciliation may take a few more moments to complete."
+          fi
