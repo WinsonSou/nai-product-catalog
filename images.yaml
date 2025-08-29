@@ -1,0 +1,8 @@
+#Mind the Gap image.yaml file
+
+---
+docker.io:
+  images:
+    envoyproxy/gateway:
+    - v1.3.2
+    - distroless-v1.33.1 

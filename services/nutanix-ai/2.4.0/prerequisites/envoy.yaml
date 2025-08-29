@@ -33,3 +33,9 @@ spec:
       retries: 30
   releaseName: envoy
   targetNamespace: envoy-gateway-system
+  values:
+    deployment:
+      envoyGateway:
+        image: 
+          repository: registry.wskn.local/library/envoyproxy/gateway
+          tag: v1.3.2
