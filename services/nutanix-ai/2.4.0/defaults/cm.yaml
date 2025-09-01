@@ -144,9 +144,9 @@ data:
       storageClassName: nai-nfs-storage
 
       # supportedKserveRuntimeVersion Image in model catalog
-      supportedKserveRuntimeImage: "registry.ntnxlab.local/library/78945789345654/hf-gpu-fix"
+      supportedKserveRuntimeImage: "registry.ntnxlab.local/library/nutanix/nai-kserve-huggingfaceserver"
       supportedKserveCPURuntimeImageTag: "v0.15.2"
-      supportedKserveGPURuntimeImageTag: "latest-gpu"
+      supportedKserveGPURuntimeImageTag: "v0.15.2-gpu"
 
       # supportedKserveCustomModelServerRuntime
       supportedKserveCustomModelServerRuntimeImage: "registry.ntnxlab.local/library/nutanix/nai-kserve-custom-model-server"
