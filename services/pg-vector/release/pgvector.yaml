@@ -2,6 +2,7 @@ apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
   name: pgvector
+  namespace: ${workspaceNamespace}
 spec:
   instances: 1
   storage:
@@ -11,6 +12,7 @@ apiVersion: postgresql.cnpg.io/v1
 kind: Database
 metadata:
   name: pgvector-app
+  namespace: ${workspaceNamespace}
 spec:
   name: app
   owner: app
