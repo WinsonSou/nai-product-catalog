@@ -1,4 +1,4 @@
-displayName: Nutanix Enterprise AI
+displayName: Nutanix Enterprise AI (Airgapped)
 description: Inference endpoint management platform.
 type: catalog
 allowMultipleInstances: false
